@@ -11,3 +11,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/aaron-lohmann/narrSVAR
 BugReports: https://github.com/aaron-lohmann/narrSVAR/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
