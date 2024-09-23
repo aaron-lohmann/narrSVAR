@@ -23,7 +23,17 @@ knitr::opts_chunk$set(
 
 Structural identification of VAR models continues to be a relevant area of research. This package offers the implementation of one of those methods in `R`: Narrative sign restrictions. This method evolves around restricting structural shocks around central periods and was introduced by , henceforth AR18. The package is aimed at applied researchers who do not have the time or want to invest the effort in implementing the methodology by hand. At times the implementation may appear cumbersome which is by design as this methodology can easily be subject to mistakes. Before discussing the implementation in detail, I will lay out some key methodological insights. Further, I am pointing to shortcomings of this package in term of the adcanvement of the literature and issues pointed out by researchers of this method. The code in this package is a combination of own code, some functions of the package VarSignR and finally inspired by the Matlab code of AR18. 
 
+# Theoretical background
 
+# General workflow
+
+# Replication studies
+
+
+
+## Replication 1 - Uhlig 2005
+
+## Replication 2 - Kilian 2009
 
 
 
