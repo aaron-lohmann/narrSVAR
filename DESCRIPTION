@@ -15,3 +15,11 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    ggplot2,
+    gridExtra,
+    mvnfast,
+    stats,
+    grid,
+    utils
+RoxygenNote: 7.3.2
