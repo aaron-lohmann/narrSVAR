@@ -6,7 +6,7 @@ To install run:
 devtools::install_github("aaron-lohmann/narrSVAR")
 ```
 
-To work through a minimal example: 
+To work through a minimal example with stored data. Technical details, refer to vignitte or AR18.  
 
 ```
 # Application of Uhlig (2005) - Monetary policy shock
