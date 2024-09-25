@@ -7,11 +7,19 @@
 #' @param cumulative A Boolean whether IRFs should be cumulative or not
 #' @param narr A Boolean whether IRFs should be plotted which fulfill narrative or
 #' only traditional restrictions
+#' @param type Either "mean" or "median"
+#' @param bands Vector of confidence bands.
+#' @param scaling Scaling scaler.
+#' @param varnames Vector of variables to plot impulse responses for.
+#' @param steps Maximum leads to consider.
 #'
 #' @return A ggplot object
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' irf_plot(mod, 1, narr = TRUE)
+#' }
 irf_plot <- function(narrSign_model = NULL,
                      whichShock = NULL,
                      cumulative = NULL,
@@ -31,7 +39,7 @@ irf_plot <- function(narrSign_model = NULL,
     varnames <- narrSign_model$varnames
   }
 
-  IRFS <- mod$IRFS[,1:steps , whichShock, ]
+  IRFS <- mod$IRFS[, 1:steps, whichShock, ]
   irfdraws <- IRFS
 
   goodresp <- IRFS

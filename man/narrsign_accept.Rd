@@ -9,7 +9,7 @@ narrsign_accept(narrative_restr, irfs, shocks, ndrawweights, data, lag, fevds)
 \arguments{
 \item{narrative_restr}{Narrative restriction as output from narrsign_setup}
 
-\item{irfs}{A 4 dimensional array which contains IRFs for all sstructural shocks}
+\item{irfs}{A 4 dimensional array which contains IRFs for all structural shocks}
 
 \item{shocks}{A 3 dimensional array of structural shocks}
 
@@ -19,7 +19,10 @@ narrsign_accept(narrative_restr, irfs, shocks, ndrawweights, data, lag, fevds)
 
 \item{lag}{A numeric with lag used in the system}
 
-\item{fevds}{}
+\item{fevds}{Forecast error variance decompositions.}
+}
+\value{
+list of accepted draws.
 }
 \description{
 Checks narrative restrictions and reweights them accordingly.

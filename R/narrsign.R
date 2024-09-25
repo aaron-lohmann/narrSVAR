@@ -1,4 +1,9 @@
 #' Estimate a SVAR model with narrative restrictions
+#' Estimate the model.
+#'
+#' This is the main function of the package which always needs to be executed.
+#' Even though the function is called narrsign(), also allows for estimating of
+#' purely sign restricted models.
 #'
 #' @param data A tibble or ts object containing the data
 #' @param lags A numeric with the amound of lags to include
@@ -16,11 +21,27 @@
 #' @param narrweightdraws Amount of draws for the importance sampler.
 #'
 #' @return A list with outputs differentiating between model identified with
-#' traditional sign restrictions and narrative sign restictions.
+#' traditional sign restrictions and narrative sign restrictions. Throws
+#' warnings if accepted amount of draws is low.
 #'
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' uhlig_m <- narrsign(
+#'   data = ts(uhlig[, -1]),
+#'   lags = 12,
+#'   trad_signs = uhlig_tradsign,
+#'   narr_restr = uhlig_narr_rest,
+#'   nkeep = 1000,
+#'   draws = 100,
+#'   subdraws = 300,
+#'   elasticitybounds = NULL,
+#'   const = FALSE,
+#'   steps = 30
+#' )
+#' }
+#'
 narrsign <- function(data = NULL,
                      lags = 12,
                      trad_signs = NULL,
@@ -59,22 +80,20 @@ narrsign <- function(data = NULL,
     )
   }
 
-  if (!is.null(narr_restr)){
+  if (!is.null(narr_restr)) {
     ret <- list(
       trad = trad_m, narr = narr_m, trad_restrict = trad_signs, narr_restrict = narr_restr,
       elasticity_bounds = elasticitybounds, savednarrative = dim(narr_m$IRFS)[1], data = data,
-      varnames = colnames(data), shocknames = trad_signs$shocknames, dates = narr_restr$dates, lags = lag
+      varnames = colnames(data), shocknames = trad_signs$shocknames, dates = narr_restr$dates, lags = lags
     )
   } else {
     ret <- list(
       trad = trad_m, narr = NULL, trad_restrict = trad_signs, narr_restrict = NULL,
       elasticity_bounds = elasticitybounds, savednarrative = NULL, data = data,
-      varnames = colnames(data), shocknames = trad_signs$shocknames, dates = NULL, lags = lag
+      varnames = colnames(data), shocknames = trad_signs$shocknames, dates = NULL, lags = lags
     )
   }
 
 
   ret
 }
-
-

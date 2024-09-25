@@ -3,13 +3,21 @@
 #'
 #' @param narrSign_model A model object of class narrsign
 #' @param whichShock A string with the name of shock to be plotted
-#' 
+#' @param varnames Vector of variable names to plot. Default is NULL which plots all variables.
+#' @param type Either "mean" or "median"
+#' @param bands Vector of confidence bands with lower and upper bound.
+#' @param steps Amount of steps forward to be considered.
+#'
 #' @import ggplot2 grid
-#' 
-#' @return
+#'
+#' @return A ggplot2 object
 #' @export
 #'
 #' @examples
+#'\dontrun{
+#' Minimal example which should also be the default approach.
+#' two_fevd_plot(mod , 1)
+#'}
 two_fevd_plot <- function(narrSign_model = NULL,
                           whichShock = NULL,
                           varnames = NULL,
@@ -107,7 +115,7 @@ two_fevd_plot <- function(narrSign_model = NULL,
         ylab(varnames[i]) +
         geom_line(aes(x = horizon, y = rep(0, length(horizon)))) +
         geom_ribbon(aes(ymin = impt_nar[i, , 2], ymax = impt_nar[i, , 3]), alpha = 0.4, fill = "#F8766D") +
-        geom_line(aes(x = horizon, y = impt_nar[i, , 1]), col = "#F8766D", size = 1.5)
+        geom_line(aes(x = horizon, y = impt_nar[i, , 1]), col = "#F8766D", size = 1.5) + theme_minimal()
     })
   }
 

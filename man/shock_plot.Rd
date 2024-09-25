@@ -2,21 +2,28 @@
 % Please edit documentation in R/shock_plot.R
 \name{shock_plot}
 \alias{shock_plot}
-\title{Plot structural shocks for all identified shocks}
+\title{Plot structural shocks for one identified shock.}
 \usage{
 shock_plot(narrSign_model = NULL, whichShock = NULL, narr = FALSE, prob = 0.5)
 }
 \arguments{
-\item{narrSign_model}{A model object of class narrsign}
+\item{narrSign_model}{A model object coming from narrsign()}
 
 \item{whichShock}{A string with the name of shock to be plotted}
 
 \item{narr}{A Boolean whether shocks identified by narrative restrictions
 should be used. If False only traditional}
+
+\item{prob}{Argument indicating the quantile.}
 }
 \value{
 A ggplot object
 }
 \description{
-Plot structural shocks for all identified shocks
+Plot structural shocks for one identified shock.
+}
+\examples{
+\dontrun{
+shock_plot(model, 1, narr = TRUE, prob = 0.8)
+}
 }

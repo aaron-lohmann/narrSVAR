@@ -15,14 +15,16 @@ should hold}
 
 \item{constrained}{A K X 1 vector containing the traditional restrictions}
 
-\item{impulses}{A matrix containging the computed impulse responses}
+\item{impulses}{A matrix containing the computed impulse responses}
 
 \item{Q}{An orthogonal matrix}
 
 \item{signshocks}{Which column of the Q matrix is considered}
+
+\item{cum}{Boolean whether the IRFs should be cumulative.}
 }
 \value{
-A list numeric (1 if accepted, 0 if not accpeted)
+A list numeric (1 if accepted, 0 if not accepted)
 }
 \description{
 Takes impulse responses and Q draw to check whether traditional sign restrictions

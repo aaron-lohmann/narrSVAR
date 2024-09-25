@@ -2,21 +2,29 @@
 % Please edit documentation in R/two_shock_plot.R
 \name{two_shock_plot}
 \alias{two_shock_plot}
-\title{Plot structural shocks for all identified shocks}
+\title{Plot time series of specified structural shock for both identifications.}
 \usage{
 two_shock_plot(narrSign_model = NULL, whichShock = NULL, prob = 0.5)
 }
 \arguments{
-\item{narrSign_model}{A model object of class narrsign}
+\item{narrSign_model}{Model object which stores the model coming from narrsign().}
 
 \item{whichShock}{A string with the name of shock to be plotted or a numeric
 with the position of the shock within the system}
 
-\item{prob}{Argument for quantile function}
+\item{prob}{Numeric between 0 and 1 indicating which quantile to plot. Default value is 0.5.}
 }
 \value{
 A ggplot object
 }
 \description{
-Plot structural shocks for all identified shocks
+Plot time series of specified structural shock for both identifications.
+}
+\examples{
+\dontrun{
+two_shock_plot(mod, 1)
+
+# The 0.9 quantile
+two_shock_plot(mod, 1, 0.9)
+}
 }

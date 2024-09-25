@@ -18,8 +18,25 @@ two_fevd_plot(
 \item{narrSign_model}{A model object of class narrsign}
 
 \item{whichShock}{A string with the name of shock to be plotted}
+
+\item{varnames}{Vector of variable names to plot. Default is NULL which plots all variables.}
+
+\item{type}{Either "mean" or "median"}
+
+\item{bands}{Vector of confidence bands with lower and upper bound.}
+
+\item{steps}{Amount of steps forward to be considered.}
+}
+\value{
+A ggplot2 object
 }
 \description{
 Plot the forecast error variance decompositions for both traditional and narrative
 restrictions
+}
+\examples{
+\dontrun{
+Minimal example which should also be the default approach.
+two_fevd_plot(mod , 1)
+}
 }

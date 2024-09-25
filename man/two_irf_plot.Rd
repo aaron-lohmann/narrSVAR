@@ -2,7 +2,7 @@
 % Please edit documentation in R/two_irf_plot.R
 \name{two_irf_plot}
 \alias{two_irf_plot}
-\title{Plot IRFs for traditional and narrative restrictions}
+\title{Plot structural IRFs for traditional and narrative restrictions}
 \usage{
 two_irf_plot(
   narrSign_model = NULL,
@@ -17,16 +17,35 @@ two_irf_plot(
 )
 }
 \arguments{
-\item{narrSign_model}{A model of class narrsign}
+\item{narrSign_model}{Model object which stores the model coming from narrsign().}
 
 \item{whichShock}{A numeric indicating which shock to plot. Based on the order in
-narrSign_model}
+model.}
 
 \item{cumulative}{A Boolean whether cumulative IRFs should be plotted}
+
+\item{scaling_trad}{Scaling parameter for the IRFs identified with traditional sign restrictions.}
+
+\item{scaling_nar}{Scaling parameter for the IRFs identified with narrative restrictions.}
+
+\item{varnames}{Vector of variable names to plot. Default is NULL which plots all variables.}
+
+\item{type}{Either "mean" or "median"}
+
+\item{bands}{Vector of confidence bands with lower and upper bound.}
+
+\item{steps}{Amount of steps forward to be considered.}
 }
 \value{
 A ggplot object
 }
 \description{
-Plot IRFs for traditional and narrative restrictions
+Plot structural IRFs for traditional and narrative restrictions
+}
+\examples{
+\dontrun{
+Minimal example which should also be the default approach.
+two_irf_plot(mod , 1)
+}
+
 }

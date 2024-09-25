@@ -2,7 +2,8 @@
 % Please edit documentation in R/narrsign.R
 \name{narrsign}
 \alias{narrsign}
-\title{Estimate a SVAR model with narrative restrictions}
+\title{Estimate a SVAR model with narrative restrictions
+Estimate the model.}
 \usage{
 narrsign(
   data = NULL,
@@ -46,8 +47,28 @@ bound should be considered}
 }
 \value{
 A list with outputs differentiating between model identified with
-traditional sign restrictions and narrative sign restictions.
+traditional sign restrictions and narrative sign restrictions. Throws
+warnings if accepted amount of draws is low.
 }
 \description{
-Estimate a SVAR model with narrative restrictions
+This is the main function of the package which always needs to be executed.
+Even though the function is called narrsign(), also allows for estimating of
+purely sign restricted models.
+}
+\examples{
+\dontrun{
+uhlig_m <- narrsign(
+  data = ts(uhlig[, -1]),
+  lags = 12,
+  trad_signs = uhlig_tradsign,
+  narr_restr = uhlig_narr_rest,
+  nkeep = 1000,
+  draws = 100,
+  subdraws = 300,
+  elasticitybounds = NULL,
+  const = FALSE,
+  steps = 30
+)
+}
+
 }

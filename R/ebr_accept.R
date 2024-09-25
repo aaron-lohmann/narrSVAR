@@ -36,7 +36,7 @@ ebr_accept <- function(ebr = NULL,
 
   # Define elasticity matrix which stores which of the elasticity bounds
   # are satisfieed
-  E <- matrix(NA, length(shock_names) , 1)
+  E <- matrix(NA, length(shock_names), 1)
 
   for (b in 1:length(shock_names)) {
     # Pick the column which corresponds to the shock in question

@@ -5,14 +5,14 @@
 #' Will in the long run change this such that this all comes from the model
 #'
 #' @param narrative_restr Narrative restriction as output from narrsign_setup
-#' @param irfs A 4 dimensional array which contains IRFs for all sstructural shocks
+#' @param irfs A 4 dimensional array which contains IRFs for all structural shocks
 #' @param shocks A 3 dimensional array of structural shocks
 #' @param ndrawweights A numeric with the amount of draws for the fake shocks
 #' @param data Data used to estimate the model
 #' @param lag A numeric with lag used in the system
-#' @param fevds
+#' @param fevds Forecast error variance decompositions.
 #'
-#' @return
+#' @return list of accepted draws.
 #'
 
 narrsign_accept <- function(narrative_restr,

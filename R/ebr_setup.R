@@ -49,14 +49,16 @@ ebr_setup <- function(shock_names = NULL,
                       bounds = NULL) {
   # Check if all inputs are provided and of the same length
   if (is.null(shock_names) || is.null(num_variable) || is.null(denom_variable) ||
-      is.null(horizon) || is.null(bounds)) {
+    is.null(horizon) || is.null(bounds)) {
     stop("All input vectors must be provided.")
   }
 
-  if (!all(length(shock_names) == length(num_variable),
-           length(num_variable) == length(denom_variable),
-           length(denom_variable) == length(horizon),
-           length(horizon) == length(bounds))) {
+  if (!all(
+    length(shock_names) == length(num_variable),
+    length(num_variable) == length(denom_variable),
+    length(denom_variable) == length(horizon),
+    length(horizon) == length(bounds)
+  )) {
     stop("All input vectors must have the same length.")
   }
 

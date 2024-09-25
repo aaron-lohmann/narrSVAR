@@ -6,12 +6,13 @@
 #' @param lags Numeric of amount of lags to include in the model
 #' @param xdata External data. (Not supported in narrSign package)
 #' @param const A Boolean whether to include a constant in the model
-#' @param breaks Breaks (Not supoerted in narrSign package)
-#' 
+#' @param breaks Breaks (Not suppoerted in narrSVAR package , potentially added in the future)
+#'
 #' @import stats
 #'
-#' @return A list containing paremeter, covariance, residuals, singularity check
+#' @return A list containing parameter, covariance, residuals, singularity check
 #'
+#' @references VarSignR
 reducedform_var <-
   function(ydata = NA, lags = 2, xdata = NULL, const = TRUE, breaks = NULL) {
     if (is.null(dim(ydata))) dim(ydata) <- c(length(ydata), 1)

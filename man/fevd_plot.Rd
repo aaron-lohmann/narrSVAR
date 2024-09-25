@@ -20,10 +20,22 @@ fevd_plot(
 
 \item{narr}{A Boolean whether shocks identified by narrative restrictions
 should be used. If False only traditional}
+
+\item{type}{A string either "median" or "mean".}
+
+\item{bands}{Define range of confidence bands.}
+
+\item{varnames}{Which FEVDs to plot if NULL whole system.}
 }
 \value{
 A ggplot object which displays the FEVD for a specific shock.
 }
 \description{
 Plot the forecast error variance decompositions
+}
+\examples{
+\dontrun{
+fevd_plot(mod, 1, narr = FALSE)
+}
+
 }

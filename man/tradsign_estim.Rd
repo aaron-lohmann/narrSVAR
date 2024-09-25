@@ -13,8 +13,7 @@ tradsign_estim(
   tradsign_setup = NULL,
   constant = TRUE,
   steps = 24,
-  EBR = NULL,
-  oil_production = NULL
+  EBR = NULL
 )
 }
 \arguments{
@@ -35,6 +34,9 @@ tradsign_estim(
 \item{steps}{A numeric for amount of steps.}
 
 \item{EBR}{An object of function ebr_setup.}
+}
+\value{
+List of accepted draws.
 }
 \description{
 tradsign_estim implements a Bayesian estimation procedure to obtain a

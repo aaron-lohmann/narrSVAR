@@ -8,11 +8,12 @@
 #' @param last A numeric which is the last period in which the restrictions
 #' should hold
 #' @param constrained A K X 1 vector containing the traditional restrictions
-#' @param impulses A matrix containging the computed impulse responses
+#' @param impulses A matrix containing the computed impulse responses
 #' @param Q An orthogonal matrix
 #' @param signshocks Which column of the Q matrix is considered
+#' @param cum Boolean whether the IRFs should be cumulative.
 #'
-#' @return A list numeric (1 if accepted, 0 if not accpeted)
+#' @return A list numeric (1 if accepted, 0 if not accepted)
 
 tradsign_accept <-
   function(first,
@@ -59,7 +60,7 @@ tradsign_accept <-
             Q <- 1.0 * Q
             ik <- 1.0 * ik
             Q_out <- 1.0 * Q_out
-          } # comment this one out and uncomment bracket below.
+          }
         } else {
           acc <- 0
           rwz <- list(
@@ -68,7 +69,6 @@ tradsign_accept <-
             ika = ik
           )
           return(rwz)
-          # } # comment out this
         }
       }
     }

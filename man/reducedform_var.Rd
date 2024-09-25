@@ -21,11 +21,14 @@ reducedform_var(
 
 \item{const}{A Boolean whether to include a constant in the model}
 
-\item{breaks}{Breaks (Not supoerted in narrSign package)}
+\item{breaks}{Breaks (Not suppoerted in narrSVAR package , potentially added in the future)}
 }
 \value{
-A list containing paremeter, covariance, residuals, singularity check
+A list containing parameter, covariance, residuals, singularity check
 }
 \description{
 This function estimates the reduced form VAR model.
+}
+\references{
+VarSignR
 }

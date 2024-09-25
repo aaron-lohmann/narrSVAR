@@ -1,6 +1,8 @@
-utils::globalVariables(c("quantile",
-                         "horizon",
-                         "median",
-                         "lag",
-                         "NSR",
-                         "rest"))
+utils::globalVariables(c(
+  "quantile",
+  "horizon",
+  "median",
+  "lag",
+  "NSR",
+  "rest"
+))

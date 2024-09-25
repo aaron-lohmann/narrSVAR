@@ -1,9 +1,15 @@
-#' Plot IRFs for traditional and narrative restrictions
+#' Plot structural IRFs for traditional and narrative restrictions
 #'
-#' @param narrSign_model A model of class narrsign
+#' @param narrSign_model Model object which stores the model coming from narrsign().
 #' @param whichShock A numeric indicating which shock to plot. Based on the order in
-#' narrSign_model
+#' model.
 #' @param cumulative A Boolean whether cumulative IRFs should be plotted
+#' @param scaling_trad Scaling parameter for the IRFs identified with traditional sign restrictions.
+#' @param scaling_nar  Scaling parameter for the IRFs identified with narrative restrictions.
+#' @param varnames Vector of variable names to plot. Default is NULL which plots all variables.
+#' @param type Either "mean" or "median"
+#' @param bands Vector of confidence bands with lower and upper bound.
+#' @param steps Amount of steps forward to be considered.
 #'
 #' @import ggplot2 grid
 #'
@@ -11,6 +17,11 @@
 #' @export
 #'
 #' @examples
+#'\dontrun{
+#' Minimal example which should also be the default approach.
+#' two_irf_plot(mod , 1)
+#'}
+#'
 two_irf_plot <- function(narrSign_model = NULL,
                          whichShock = NULL,
                          cumulative = NULL,
@@ -19,13 +30,13 @@ two_irf_plot <- function(narrSign_model = NULL,
                          varnames = NULL,
                          type = "median",
                          bands = c(0.16, 0.84),
-                         steps = dim(narrSign_model$trad$IRFS)[2] ) {
+                         steps = dim(narrSign_model$trad$IRFS)[2]) {
   if (is.null(varnames)) {
     varnames <- narrSign_model$varnames
   }
 
-  IRFS <- narrSign_model$trad$IRFS[,1:steps , whichShock, ]
-  IRFS_nar <- narrSign_model$narr$IRFS_narr[,1:steps , whichShock, ]
+  IRFS <- narrSign_model$trad$IRFS[, 1:steps , whichShock,]
+  IRFS_nar <- narrSign_model$narr$IRFS_narr[, 1:steps , whichShock,]
   irfdraws <- IRFS
   irfdraws_nar <- IRFS_nar
 
@@ -52,7 +63,8 @@ two_irf_plot <- function(narrSign_model = NULL,
       # for every draw
       for (j in 1:dim(goodresp)[1]) {
         # for the entire horizon
-        goodresp[j, , cumulative[b]] <- cumsum(goodresp[j, , cumulative[b]])
+        goodresp[j, , cumulative[b]] <-
+          cumsum(goodresp[j, , cumulative[b]])
       }
     }
   }
@@ -61,14 +73,29 @@ two_irf_plot <- function(narrSign_model = NULL,
 
   if (irftype == "mean") {
     imp_responses <- array(NA, dim = c(3, nstep, nvar))
-    irfbands <- apply(goodresp, c(2, 3), quantile, probs = c(eblow, ebupp), na.rm = TRUE)
-    irfmean <- array(apply(goodresp, c(2, 3), mean), dim = c(1, nstep, nvar))
-    dimnames(imp_responses) <- list(c("irf", "lower", "upper"), 1:nstep, varlbl)
-    imp_responses[1, , ] <- irfmean
-    imp_responses[2:3, , ] <- irfbands
-    dimnames(imp_responses) <- list(c("irf", "lower", "upper"), 1:nstep, varlbl)
+    irfbands <-
+      apply(goodresp,
+            c(2, 3),
+            quantile,
+            probs = c(eblow, ebupp),
+            na.rm = TRUE)
+    irfmean <-
+      array(apply(goodresp, c(2, 3), mean), dim = c(1, nstep, nvar))
+    dimnames(imp_responses) <-
+      list(c("irf", "lower", "upper"), 1:nstep, varlbl)
+    imp_responses[1, ,] <- irfmean
+    imp_responses[2:3, ,] <- irfbands
+    dimnames(imp_responses) <-
+      list(c("irf", "lower", "upper"), 1:nstep, varlbl)
   } else {
-    imp_responses <- apply(goodresp, c(2, 3), quantile, probs = c(0.5, eblow, ebupp), na.rm = TRUE)
+    imp_responses <-
+      apply(
+        goodresp,
+        c(2, 3),
+        quantile,
+        probs = c(0.5, eblow, ebupp),
+        na.rm = TRUE
+      )
     # dimnames(imp_responses) <- list(c("irf", "lower", "upper"),1:nstep, varlbl)
   }
   impt <- imp_responses
@@ -98,7 +125,8 @@ two_irf_plot <- function(narrSign_model = NULL,
       # for every draw
       for (j in 1:dim(goodresp)[1]) {
         # for the entire horizon
-        goodresp[j, , cumulative[b]] <- cumsum(goodresp[j, , cumulative[b]])
+        goodresp[j, , cumulative[b]] <-
+          cumsum(goodresp[j, , cumulative[b]])
       }
     }
   }
@@ -107,14 +135,29 @@ two_irf_plot <- function(narrSign_model = NULL,
 
   if (irftype == "mean") {
     imp_responses <- array(NA, dim = c(3, nstep, nvar))
-    irfbands <- apply(goodresp, c(2, 3), quantile, probs = c(eblow, ebupp), na.rm = TRUE)
-    irfmean <- array(apply(goodresp, c(2, 3), mean), dim = c(1, nstep, nvar))
-    dimnames(imp_responses) <- list(c("irf", "lower", "upper"), 1:nstep, varlbl)
-    imp_responses[1, , ] <- irfmean
-    imp_responses[2:3, , ] <- irfbands
-    dimnames(imp_responses) <- list(c("irf", "lower", "upper"), 1:nstep, varlbl)
+    irfbands <-
+      apply(goodresp,
+            c(2, 3),
+            quantile,
+            probs = c(eblow, ebupp),
+            na.rm = TRUE)
+    irfmean <-
+      array(apply(goodresp, c(2, 3), mean), dim = c(1, nstep, nvar))
+    dimnames(imp_responses) <-
+      list(c("irf", "lower", "upper"), 1:nstep, varlbl)
+    imp_responses[1, ,] <- irfmean
+    imp_responses[2:3, ,] <- irfbands
+    dimnames(imp_responses) <-
+      list(c("irf", "lower", "upper"), 1:nstep, varlbl)
   } else {
-    imp_responses <- apply(goodresp, c(2, 3), quantile, probs = c(0.5, eblow, ebupp), na.rm = TRUE)
+    imp_responses <-
+      apply(
+        goodresp,
+        c(2, 3),
+        quantile,
+        probs = c(0.5, eblow, ebupp),
+        na.rm = TRUE
+      )
     # dimnames(imp_responses) <- list(c("irf", "lower", "upper"),1:nstep, varlbl)
   }
   impt_nar <- imp_responses
@@ -127,16 +170,29 @@ two_irf_plot <- function(narrSign_model = NULL,
   for (i in 1:nvar) {
     plot_list[[i]] <- local({
       i <- i
-      ggplot(data = data.frame(horizon = 1:dim(impt)[2], median = impt[i, , 1]), aes(x = horizon, y = median)) +
-        geom_ribbon(aes(ymin = impt[i, , 2], ymax = impt[i, , 3]), alpha = 0.4, fill = "#1aabb0") +
+      ggplot(data = data.frame(horizon = 1:dim(impt)[2], median = impt[i, , 1]),
+             aes(x = horizon, y = median)) +
+        geom_ribbon(aes(ymin = impt[i, , 2], ymax = impt[i, , 3]),
+                    alpha = 0.4,
+                    fill = "#1aabb0") +
         geom_line(col = "#00BFC4", size = 1.5) +
         ylab(varnames[i]) +
         geom_line(aes(x = horizon, y = rep(0, length(horizon)))) +
-        geom_ribbon(aes(ymin = impt_nar[i, , 2], ymax = impt_nar[i, , 3]), alpha = 0.8, fill = "#F8766D") +
-        geom_line(aes(x = horizon, y = impt_nar[i, , 1]), col = "#F8766D", size = 1.5)
-        
+        geom_ribbon(
+          aes(ymin = impt_nar[i, , 2], ymax = impt_nar[i, , 3]),
+          alpha = 0.8,
+          fill = "#F8766D"
+        ) +
+        geom_line(aes(x = horizon, y = impt_nar[i, , 1]),
+                  col = "#F8766D",
+                  size = 1.5) + theme_minimal()
+
     })
   }
 
-  gridExtra::grid.arrange(grobs = plot_list, top = textGrob(paste("Shock:", narrSign_model$shocknames[whichShock])), gp = grid::gpar(fontsize = 20, font = 3))
+  gridExtra::grid.arrange(
+    grobs = plot_list,
+    top = textGrob(paste("Shock:", narrSign_model$shocknames[whichShock])),
+    gp = grid::gpar(fontsize = 20, font = 3)
+  )
 }

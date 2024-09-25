@@ -25,10 +25,25 @@ irf_plot(
 
 \item{narr}{A Boolean whether IRFs should be plotted which fulfill narrative or
 only traditional restrictions}
+
+\item{type}{Either "mean" or "median"}
+
+\item{bands}{Vector of confidence bands.}
+
+\item{scaling}{Scaling scaler.}
+
+\item{varnames}{Vector of variables to plot impulse responses for.}
+
+\item{steps}{Maximum leads to consider.}
 }
 \value{
 A ggplot object
 }
 \description{
 Plots all IRFs for a specified shock
+}
+\examples{
+\dontrun{
+irf_plot(mod, 1, narr = TRUE)
+}
 }

@@ -4,7 +4,9 @@
 #' @param whichShock A string with the name of shock to be plotted
 #' @param narr A Boolean whether shocks identified by narrative restrictions
 #' should be used. If False only traditional
-#' 
+#' @param type A string either "median" or "mean".
+#' @param bands Define range of confidence bands.
+#' @param varnames Which FEVDs to plot if NULL whole system.
 #'
 #' @import ggplot2
 #'
@@ -12,6 +14,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' fevd_plot(mod, 1, narr = FALSE)
+#' }
+#'
 fevd_plot <- function(narrSign_model = NULL,
                       whichShock = NULL,
                       narr = FALSE,
@@ -74,7 +80,8 @@ fevd_plot <- function(narrSign_model = NULL,
         geom_ribbon(aes(ymin = impt[i, , 2], ymax = impt[i, , 3]), alpha = 0.4, fill = "#F8766D") +
         geom_line(col = "#F8766D", size = 1.5) +
         ylab(varnames[i]) +
-        geom_line(aes(x = horizon, y = rep(0, length(horizon))))
+        geom_line(aes(x = horizon, y = rep(0, length(horizon)))) +
+        theme_minimal()
     })
   }
 

@@ -4,12 +4,12 @@
 #' sets up the arrays necessary for evaluation. Two types of restrictions are
 #' possible and should be noted carefully. One can either place a restriction
 #' on the sign of a specific shock or on the historic contribution. See package
-#' documention and the examples which should be self explanatory.
+#' documentation and the examples which should be self explanatory.
 #'
 #' @param shock_names A vector of shock names on which narrative restrictions
 #' are placed
-#' @param shock_type A vector of type of shocks which corresponds to the name
-#' of shocks
+#' @param shock_type A vector of type of shocks which corresponds to the length
+#' of shock_names
 #' @param shock_dates A matrix of dimensions 2 x (length of shock_names) which
 #' contains start and end date of narrative restriction
 #' @param dates A vector of dates based on the original data set
@@ -24,7 +24,35 @@
 #' @return A list of arrays which contains the narrative restrictions
 #' @export
 #'
+#' @references AR18.
+#'
 #' @examples
+#' \dontrun{
+#' varnames_uhlig <- colnames(uhlig)
+#' allshocknames <- c("MP")
+#' shock_names <- c("MP", "MP")
+#' shock_type <- c("sign", "contribution")
+#' shock_dates <- matrix(c("1979-10-01", "1979-10-01", "1979-10-01", "1979-10-01"), 2, 2)
+#' dates <- uhlig[, 1]
+#' relevant_variable <- c(NA, varnames_uhlig[7])
+#' shock_sign <- c(1, 1)
+#' shock_size <- c(NA, "strong")
+#' lag <- 12
+#' data <- uhlig[, -1]
+#'
+#' uhlig_narr_rest <- narrsign_setup(
+#'   allshocknames = allshocknames,
+#'   shock_names = shock_names,
+#'   shock_type = shock_type,
+#'   shock_dates = shock_dates,
+#'   dates = dates,
+#'   relevant_variable = relevant_variable,
+#'   shock_sign = shock_sign,
+#'   shock_size = shock_size,
+#'   lag = lag,
+#'   data = data
+#' )
+#' }
 narrsign_setup <- function(allshocknames = NULL,
                            shock_names = NULL,
                            shock_type = NULL,
